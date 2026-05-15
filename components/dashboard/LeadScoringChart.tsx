@@ -1,6 +1,17 @@
 import { HelpCircle } from "lucide-react";
 
-export default function LeadScoringChart() {
+interface Distribution {
+  hot: number;
+  warm: number;
+  cold: number;
+}
+
+interface LeadScoringChartProps {
+  distribution: Distribution;
+  totalLeads: number;
+}
+
+export default function LeadScoringChart({ distribution, totalLeads }: LeadScoringChartProps) {
   return (
     <div className="bg-white p-6 rounded-lg shadow border border-gray-100">
       <div className="flex items-center justify-between mb-6">
@@ -16,36 +27,36 @@ export default function LeadScoringChart() {
         <div>
           <div className="flex justify-between mb-1">
             <span className="text-sm font-medium text-red-700">Hot Leads</span>
-            <span className="text-sm font-medium text-red-700">28%</span>
+            <span className="text-sm font-medium text-red-700">{distribution.hot}%</span>
           </div>
           <div className="w-full bg-red-100 rounded-full h-2.5">
             <div
               className="bg-red-600 h-2.5 rounded-full"
-              style={{ width: "28%" }}
+              style={{ width: `${distribution.hot}%` }}
             ></div>
           </div>
         </div>
         <div>
           <div className="flex justify-between mb-1">
             <span className="text-sm font-medium text-orange-700">Warm Leads</span>
-            <span className="text-sm font-medium text-orange-700">45%</span>
+            <span className="text-sm font-medium text-orange-700">{distribution.warm}%</span>
           </div>
           <div className="w-full bg-orange-100 rounded-full h-2.5">
             <div
               className="bg-orange-500 h-2.5 rounded-full"
-              style={{ width: "45%" }}
+              style={{ width: `${distribution.warm}%` }}
             ></div>
           </div>
         </div>
         <div>
           <div className="flex justify-between mb-1">
             <span className="text-sm font-medium text-blue-700">Cold Leads</span>
-            <span className="text-sm font-medium text-blue-700">27%</span>
+            <span className="text-sm font-medium text-blue-700">{distribution.cold}%</span>
           </div>
           <div className="w-full bg-blue-100 rounded-full h-2.5">
             <div
               className="bg-blue-600 h-2.5 rounded-full"
-              style={{ width: "27%" }}
+              style={{ width: `${distribution.cold}%` }}
             ></div>
           </div>
         </div>
@@ -53,7 +64,7 @@ export default function LeadScoringChart() {
       <div className="mt-8 pt-6 border-t border-gray-100">
         <div className="flex items-center justify-between text-sm text-gray-500">
           <span>Total Qualified Leads</span>
-          <span className="font-bold text-gray-900">1,284</span>
+          <span className="font-bold text-gray-900">{totalLeads.toLocaleString()}</span>
         </div>
       </div>
     </div>
